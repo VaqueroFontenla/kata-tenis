@@ -1,26 +1,42 @@
-import React from 'react';
-import logo from './logo.svg';
+import * as React from "react";
+import { hot } from 'react-hot-loader/root'
+import { Player } from './components/Player';
+import { Button } from './components/Button';
 import './App.css';
 
 const App = () => {
+
+  const className = '';
+  const [userName, setUSerName] = React.useState('');
+  const [game, setGame] = React.useState(false);
+
+  const onChangeUserName = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setUSerName(event.target.value)
+  }
+
+  const onResetPlayer = () => setUSerName('');
+  const onShowGame = () => setGame(true)
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div>
+        <Player currentUserName={userName}
+          onChangeUserName={onChangeUserName}
+        />
+        <Player currentUserName={userName}
+          onChangeUserName={onChangeUserName}
+        />
+
+      </div>
+      <div>
+        <Button onClick={onShowGame}
+          className={className}> Start game </Button>
+        <Button onClick={onResetPlayer}
+          className={className}> Reset Player </Button>
+      </div>
+
     </div>
   );
 }
 
-export default App;
+export default hot(App);
