@@ -1,3 +1,24 @@
+## Normas del tennis
+
+### Básicas
+
+En el juego del tennis, un jugador comienza con puntación 0. Los puntos se ganan enla siguiente secuencia: 0 -> 15 -> 30 -> 40Si un jugador consigue 40 y puntua de nuevo, el jugador gana el juego, siempre queel otro jugador no tenga 40 puntos en ese momento. Si los dos jugadores tienen almismo tiempo 40 puntos, a esto se llama "iguales" (deuce en inglés)
+
+### Iguales
+
+Puntuar durante iguales, da al jugador "ventaja". Si el otro jugador puntua en esemomento, la puntuación vuelve a iguales.
+
+Si un jugador tiene "ventaja" y puntua de nuevo, el jugador gana el juego.
+
+### Requerimientos
+- Los jugadores deben poder ganar puntos.
+- El juego debe terminar con un ganador.
+- Debes de manejar la casuística de "iguales"
+- Después de terminar el juego, debe determinarse quién es el ganador.
+- Debe ser posible obtener la puntuación de cualquier de los jugadores encualquier momento del partido.
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
