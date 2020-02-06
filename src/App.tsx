@@ -27,36 +27,42 @@ const App = () => {
 
   return (
     <div className="App">
-      <div>
-        <Player currentUserName={namePlayerOne}
-            onChangeUserName={onChangenamePlayerOne}
-        />
-         <Player currentUserName={namePlayerTwo}
-            onChangeUserName={onChangenamePlayerTwo}
-        />
-
-      </div>
-      <div>
-        <Button 
-          onClick={onShowGame}
-          className={className}> 
-            Start game 
+      <div className="wrapper">
+        <div className="section">
+          <div>
+            <Player 
+              currentUserName={namePlayerOne}
+              onChangeUserName={onChangenamePlayerOne}
+            />
+            <Player 
+              currentUserName={namePlayerTwo}
+              onChangeUserName={onChangenamePlayerTwo}
+            />
+          </div>
+        </div>
+        <div>
+          <Button
+            onClick={onShowGame}
+            className={className}>
+            Start game
         </Button>
-        <Button 
-          onClick={onResetPlayer}
-          className={className}> 
-            Reset Player  
+          <Button
+            onClick={onResetPlayer}
+            className={className}>
+            Reset Player
         </Button>
+        </div>
+
+        <div className="section">
+          {showGame &&
+            <Game
+              namePlayerOne={namePlayerOne}
+              namePlayerTwo={namePlayerTwo}
+            />
+          }
+        </div>
       </div>
 
-      <div>
-        {showGame && 
-          <Game 
-            namePlayerOne={namePlayerOne}
-            namePlayerTwo={namePlayerTwo}
-          />
-        }
-      </div>
     </div>
   );
 }

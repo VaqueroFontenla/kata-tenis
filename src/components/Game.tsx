@@ -19,53 +19,6 @@ export const Game = (props: Props) => {
     const [ pointsPlayerOne, setPointsPlayerOne] = React.useState(0);
     const [ pointsPlayerTwo, setPointsPlayerTwo] = React.useState(0);
 
-    React.useEffect(()=> {
-        const differenceScore = scorePlayerOne - scorePlayerTwo;
-            if (differenceScore === 0 && scorePlayerOne !== 0 && scorePlayerTwo !== 0 ) {
-                switch(scorePlayerOne && scorePlayerTwo) {
-                    case 1: 
-                        setScore('Fifteen all');
-                        break;
-                    case 2: 
-                        setScore('Thirty all');
-                        break;
-                    
-                    default: {
-                        setScore('Deuce');
-                    }
-                }
-            } else if (scorePlayerOne > 3 || scorePlayerTwo > 3) {
-
-                switch(differenceScore) {
-                    case 0: {
-                        setScore('Deuce');
-                        break;
-                    }
-                    case 1: {
-                        setScore(`Advantage ${props.namePlayerOne}`);
-                        break;
-                    }
-                    case -1: {
-                        setScore(`Advantage ${props.namePlayerTwo}`);
-                        break;
-                    }
-                    case 2: {
-                        setScore(`Winner: ${props.namePlayerOne}`);
-                        break;
-                    }
-                    case -2: {
-                        setScore(`Winner: ${props.namePlayerTwo}`);
-                        break;
-                    }
-                }
-              
-            } else {   
-                setScore(`${transformScore(scorePlayerOne)}-${transformScore(scorePlayerTwo)}`)
-            }
-    
-        
-    },[scorePlayerOne,scorePlayerTwo]); 
-
     const transformScore = (score:number) => {
         switch(score) {
             case 0: {
@@ -84,6 +37,49 @@ export const Game = (props: Props) => {
                 alert('Something went wrong.')
         }
     }
+
+    React.useEffect(()=> {
+        const differenceScore = scorePlayerOne - scorePlayerTwo;
+            if (differenceScore === 0 ) {
+                switch(scorePlayerOne && scorePlayerTwo) {
+                    case 0: 
+                        setScore('Start game');
+                    case 1: 
+                        setScore('Fifteen all');
+                        break;
+                    case 2: 
+                        setScore('Thirty all');
+                        break;
+                    
+                    default: {
+                        setScore('Deuce');
+                    }
+                }
+            } else if (scorePlayerOne > 3 || scorePlayerTwo > 3) {
+                switch(differenceScore) {
+                    case 0: 
+                        setScore('Deuce');
+                        break;
+                    case 1: 
+                        setScore(`Advantage ${props.namePlayerOne}`);
+                        break;
+                    case -1: 
+                        setScore(`Advantage ${props.namePlayerTwo}`);
+                        break;
+                    
+                    case 2: 
+                        setScore(`Winner: ${props.namePlayerOne}`);
+                        break;
+                    
+                    case -2:
+                        setScore(`Winner: ${props.namePlayerTwo}`);
+                        break;
+                }
+            } else {   
+                setScore(`${transformScore(scorePlayerOne)}-${transformScore(scorePlayerTwo)}`)
+            }
+        
+    },[scorePlayerOne,scorePlayerTwo]); 
 
     const checkPoinstPlayer = (scorePlayer: number): any => {
         switch(scorePlayer) {
@@ -140,7 +136,6 @@ export const Game = (props: Props) => {
                 Score {props.namePlayerTwo}: {pointsPlayerTwo}
             </div>
            <div>
-              
                <Button 
                     onClick={()=> resetGame()}
                     className={className}> 
