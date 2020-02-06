@@ -21,73 +21,83 @@ export const Game = (props: Props) => {
 
     React.useEffect(()=> {
         const differenceScore = scorePlayerOne - scorePlayerTwo;
-            if (differenceScore === 0 ) {
+            if (differenceScore === 0 && scorePlayerOne !== 0 && scorePlayerTwo !== 0 ) {
                 switch(scorePlayerOne && scorePlayerTwo) {
-                    case 15: 
+                    case 1: 
                         setScore('Fifteen all');
                         break;
-                    case 30: {
-                        setScore('Thirty all')
-                    }
-                    case 40: {
-                        setScore('Deuce')
+                    case 2: 
+                        setScore('Thirty all');
+                        break;
+                    
+                    default: {
+                        setScore('Deuce');
                     }
                 }
-            } else if (scorePlayerOne > 40 || scorePlayerTwo > 40) {
+            } else if (scorePlayerOne > 3 || scorePlayerTwo > 3) {
+
                 switch(differenceScore) {
+                    case 0: {
+                        setScore('Deuce');
+                        break;
+                    }
                     case 1: {
-                        setScore(`Advantage ${props.namePlayerOne}`)
+                        setScore(`Advantage ${props.namePlayerOne}`);
+                        break;
                     }
                     case -1: {
-                        setScore(`Advantage ${props.namePlayerTwo}`)
+                        setScore(`Advantage ${props.namePlayerTwo}`);
+                        break;
                     }
                     case 2: {
-                        setScore(`Winner: ${props.namePlayerOne}`)
+                        setScore(`Winner: ${props.namePlayerOne}`);
+                        break;
                     }
                     case -2: {
-                        setScore(`Winner: ${props.namePlayerTwo}`)
+                        setScore(`Winner: ${props.namePlayerTwo}`);
+                        break;
                     }
                 }
               
-            } else {
-                const transformScore = (score:number) => {
-                    switch(score) {
-                      case 0: {
-                          return 'Love';
-                      }
-                      case 1: {
-                        'Fifteen';
-                      }
-                      case 2: {
-                        'Thirty';
-                      }
-                      case 4: {
-                        'Forty'
-                      }
-                      default:
-                        alert('Something went wrong.')
-                    }
-                  }
+            } else {   
                 setScore(`${transformScore(scorePlayerOne)}-${transformScore(scorePlayerTwo)}`)
             }
     
         
     },[scorePlayerOne,scorePlayerTwo]); 
 
+    const transformScore = (score:number) => {
+        switch(score) {
+            case 0: {
+                return 'Love';
+            }
+            case 1: {
+                return 'Fifteen';
+            }
+            case 2: {
+                return 'Thirty';
+            }
+            case 3: {
+                return 'Forty'
+            }
+            case 4:
+                alert('Something went wrong.')
+        }
+    }
+
     const checkPoinstPlayer = (scorePlayer: number): any => {
         switch(scorePlayer) {
-            case 1:
-                15;
-                break;
-            case 2:
-                30;
-                break;
-            case 3:
-                40;
-                break;
+            case 1: {
+                return 15
+            }
+            case 2:{
+                return 30
+            }
+            case 3:{
+                return 40
+            }
             default :
                 setShowPoints(false)  
-                break;
         }
     }
 
@@ -100,7 +110,7 @@ export const Game = (props: Props) => {
         if (playerName === props.namePlayerOne)
             setScorePlayerOne(scorePlayerOne + 1);
         else if  (playerName === props.namePlayerTwo)
-            setScorePlayerTwo(scorePlayerTwo + 2);
+            setScorePlayerTwo(scorePlayerTwo + 1);
     }
 
     const resetGame = () => {
@@ -118,7 +128,7 @@ export const Game = (props: Props) => {
                 >
                     Won Point
                 </Button>
-                Score {props.namePlayerOne}: {scorePlayerOne}
+                Score {props.namePlayerOne}: {pointsPlayerOne}
             </div>
             <div>
             {props.namePlayerTwo}
@@ -127,7 +137,7 @@ export const Game = (props: Props) => {
                     className={className}> 
                     Won  Point
                 </Button>
-                Score {props.namePlayerTwo}: {scorePlayerTwo}
+                Score {props.namePlayerTwo}: {pointsPlayerTwo}
             </div>
            <div>
               
@@ -136,9 +146,8 @@ export const Game = (props: Props) => {
                     className={className}> 
                     Reset Game
                 </Button>
-            </div>}
-         
-        
+            </div>
+            <h1>{score}</h1>
         </div>
     )    
 }

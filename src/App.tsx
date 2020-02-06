@@ -8,7 +8,6 @@ import './App.css';
 const App = () => {
 
   const className = '';
-  const userId = null;
   const [namePlayerOne, setnamePlayerOne] = React.useState('');
   const [namePlayerTwo, setnamePlayerTwo] = React.useState('');
   const [showGame, setShowGame] = React.useState(false);
