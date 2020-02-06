@@ -9,31 +9,31 @@ const App = () => {
 
   const className = '';
   const userId = null;
-  const [userNamePlayerOne, setUserNamePlayerOne] = React.useState('');
-  const [userNamePlayerTwo, setUserNamePlayerTwo] = React.useState('');
+  const [namePlayerOne, setnamePlayerOne] = React.useState('');
+  const [namePlayerTwo, setnamePlayerTwo] = React.useState('');
   const [showGame, setShowGame] = React.useState(false);
 
-  const onChangeUserNamePlayerOne = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUserNamePlayerOne(event.target.value);
+  const onChangenamePlayerOne = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setnamePlayerOne(event.target.value);
   }
-  const onChangeUserNamePlayerTwo = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUserNamePlayerTwo(event.target.value);
+  const onChangenamePlayerTwo = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setnamePlayerTwo(event.target.value);
   }
 
   const onResetPlayer = () => {
-    setUserNamePlayerOne('');
-    setUserNamePlayerTwo('');
+    setnamePlayerOne('');
+    setnamePlayerTwo('');
   }
   const onShowGame = () => setShowGame(true)
 
   return (
     <div className="App">
       <div>
-        <Player currentUserName={userNamePlayerOne}
-            onChangeUserName={onChangeUserNamePlayerOne}
+        <Player currentUserName={namePlayerOne}
+            onChangeUserName={onChangenamePlayerOne}
         />
-         <Player currentUserName={userNamePlayerTwo}
-            onChangeUserName={onChangeUserNamePlayerTwo}
+         <Player currentUserName={namePlayerTwo}
+            onChangeUserName={onChangenamePlayerTwo}
         />
 
       </div>
@@ -53,8 +53,8 @@ const App = () => {
       <div>
         {showGame && 
           <Game 
-            userNamePlayerOne={userNamePlayerOne}
-            userNamePlayerTwo={userNamePlayerTwo}
+            namePlayerOne={namePlayerOne}
+            namePlayerTwo={namePlayerTwo}
           />
         }
       </div>
