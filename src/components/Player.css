@@ -15,12 +15,8 @@
 .player__input {
     width: 40rem;
     height: 4rem;
+    padding-left: 1rem;
     border: 0.33rem solid #000080;
     border-radius: 1rem;
     font-size: 2rem;
-}
-
-.score {
-    font-size: 10rem;
-    color: yellow;
 }
