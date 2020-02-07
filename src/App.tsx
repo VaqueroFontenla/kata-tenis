@@ -3,12 +3,17 @@ import { hot } from 'react-hot-loader/root'
 import { Player } from './components/Player';
 import { Button } from './components/Button';
 import { Game } from './components/Game';
+import { Panel } from './components/Panel';
+import { PlayerModel } from './models/Player';
+
 import './App.css';
 
 const App = () => {
 
-  const [namePlayerOne, setnamePlayerOne] = React.useState('');
-  const [namePlayerTwo, setnamePlayerTwo] = React.useState('');
+  const [namePlayerOne, setnamePlayerOne] = React.useState<string>('');
+  const [namePlayerTwo, setnamePlayerTwo] = React.useState<string>('');
+  const [winner, setWinner] = React.useState<string>('');
+  const [players, setPlayers] = React.useState<PlayerModel[]>([]);
   const [showGame, setShowGame] = React.useState(false);
 
   const onChangenamePlayerOne = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -22,7 +27,11 @@ const App = () => {
     setnamePlayerOne('');
     setnamePlayerTwo('');
   }
-  const onShowGame = () => setShowGame(true)
+  const onShowGame = () => setShowGame(true);
+
+  React.useEffect(()=> {
+    
+ },[namePlayerOne,namePlayerOne, winner]); 
 
   return (
     <div className="App">
@@ -54,9 +63,11 @@ const App = () => {
         }
         {showGame &&
           <div className="wrapper">
+            <Panel players={players}/>
             <Game
               namePlayerOne={namePlayerOne}
               namePlayerTwo={namePlayerTwo}
+              setWinner = {setWinner}
             />
           </div>
         }

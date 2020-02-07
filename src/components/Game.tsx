@@ -3,22 +3,10 @@ import { Button } from './Button';
 import './Game.css';
 
 interface Props {
-    namePlayerOne: string
-    namePlayerTwo: string
+    namePlayerOne: string;
+    namePlayerTwo: string;
+    setWinner: (winner: string) => void;
 }
-
-interface State {
-    score: string;
-    scoreList: string[];
-    scorePlayerOne: number;
-    scoscorePlayerTwo: number;
-    showPoints: boolean;
-    pointsPlayerOne: number;
-    pointsPlayerTwo: number;
-}
-
-
-//Hacer interface de State
   
 export const Game = (props: Props) => {
 
@@ -28,7 +16,6 @@ export const Game = (props: Props) => {
     const [ scorePlayerTwo, setScorePlayerTwo] = React.useState<number>(0);
     const [ showPoints, setShowPoints] = React.useState<boolean>(true);
     const [ isWinner, setIsWinner] = React.useState<boolean>(false);
-    const [ winner, setWinner] = React.useState<string>('');
     const [ pointsPlayerOne, setPointsPlayerOne] = React.useState<number>(0);
     const [ pointsPlayerTwo, setPointsPlayerTwo] = React.useState<number>(0);
 
@@ -52,14 +39,13 @@ export const Game = (props: Props) => {
     }
 
     const finishGame = (winner:string): any => {
-        setScore('');
-        setWinner(winner);
+        setScoreList([]);
+        props.setWinner(winner);
         setIsWinner(true);
     }
 
     React.useEffect(()=> {
         const differenceScore = scorePlayerOne - scorePlayerTwo;
-        console.log(differenceScore);
             if (differenceScore === 0 ) {
                 switch(scorePlayerOne && scorePlayerTwo) {
                     case 0: 
@@ -110,8 +96,6 @@ export const Game = (props: Props) => {
             } else {   
                 setScore(`${transformScore(scorePlayerOne)}-${transformScore(scorePlayerTwo)}`)
             }
-
-        
     },[scorePlayerOne,scorePlayerTwo]); 
 
     React.useEffect(()=> {

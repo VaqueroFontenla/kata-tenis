@@ -1,0 +1,20 @@
+.panel {
+ height: 20vh;
+ display: flex;
+ justify-content: flex-end;
+ align-items: center;
+}
+
+.panel__table {
+    background-color: #fff;
+    border: 0.33rem solid #000080;
+    border-radius: 1rem;
+    font-size: 1.5rem;
+
+}
+.panel__table--header {
+
+}
+.panel__table--body {
+
+}
