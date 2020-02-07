@@ -1,0 +1,16 @@
+.button {
+    width: 15rem;
+    height: 4rem;
+    border-radius: 1rem;
+    font-size: 1.5rem;
+}
+.button__start {
+    background-color: #000080;
+    border: 0.33rem solid #fff;
+    color: #fff;  
+}
+
+.button__reset {
+    background-color: #fff;
+    border: 0.33rem solid #000080;
+}

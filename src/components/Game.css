@@ -1,0 +1,9 @@
+.game {
+    height: inherit;
+    width: inherit;
+}
+
+.game-player {
+    display: flex;
+    flex-direction: column;
+}

@@ -7,7 +7,6 @@ import './App.css';
 
 const App = () => {
 
-  const className = '';
   const [namePlayerOne, setnamePlayerOne] = React.useState('');
   const [namePlayerTwo, setnamePlayerTwo] = React.useState('');
   const [showGame, setShowGame] = React.useState(false);
@@ -27,9 +26,9 @@ const App = () => {
 
   return (
     <div className="App">
-      <div className="wrapper">
-        <div className="section">
-          <div>
+      { !showGame && 
+        <div className="wrapper">
+          <div className="player__container">
             <Player 
               currentUserName={namePlayerOne}
               onChangeUserName={onChangenamePlayerOne}
@@ -39,31 +38,29 @@ const App = () => {
               onChangeUserName={onChangenamePlayerTwo}
             />
           </div>
+          <div className="player__container">
+            <Button
+              onClick={onResetPlayer}
+              className="button button__reset">
+                Reset Players
+            </Button>
+            <Button
+              onClick={onShowGame}
+              className="button button__start">
+                Start Game
+            </Button>
+          </div>
         </div>
-        <div>
-          <Button
-            onClick={onShowGame}
-            className={className}>
-            Start game
-        </Button>
-          <Button
-            onClick={onResetPlayer}
-            className={className}>
-            Reset Player
-        </Button>
-        </div>
-
-        <div className="section">
-          {showGame &&
+        }
+        {showGame &&
+          <div className="wrapper">
             <Game
               namePlayerOne={namePlayerOne}
               namePlayerTwo={namePlayerTwo}
             />
-          }
-        </div>
-      </div>
-
-    </div>
+          </div>
+        }
+      </div> 
   );
 }
 

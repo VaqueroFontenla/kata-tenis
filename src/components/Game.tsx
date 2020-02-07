@@ -11,13 +11,14 @@ interface Props {
 //Hacer interface de State
   
 export const Game = (props: Props) => {
-    const className = '';
+
     const [ score, setScore] = React.useState('')
     const [ scorePlayerOne, setScorePlayerOne] = React.useState(0);
     const [ scorePlayerTwo, setScorePlayerTwo] = React.useState(0);
     const [ showPoints, setShowPoints] = React.useState(true);
     const [ pointsPlayerOne, setPointsPlayerOne] = React.useState(0);
     const [ pointsPlayerTwo, setPointsPlayerTwo] = React.useState(0);
+    console.log(score);
 
     const transformScore = (score:number) => {
         switch(score) {
@@ -115,34 +116,43 @@ export const Game = (props: Props) => {
     }
   
     return (
-        <div>
-            <div>
-                {props.namePlayerOne}
+        <div className="game">
+            
+            <div className="game-player">
+                <span className="game-player__label">{props.namePlayerOne}</span>
                 <Button 
                     onClick={()=> wonPoint(props.namePlayerOne)}
-                    className={className}
+                    className="button button__start"
                 >
                     Won Point
                 </Button>
-                Score {props.namePlayerOne}: {pointsPlayerOne}
+                <span className="game-player__score">{pointsPlayerOne}</span>
             </div>
-            <div>
-            {props.namePlayerTwo}
+
+            <div className="game-score">
+                <span className="score">{score}</span>
+            </div>
+
+            <div className="game-player">
+                <span  className="game-player__label">{props.namePlayerTwo}</span>
                 <Button 
                     onClick={()=> wonPoint(props.namePlayerTwo)}
-                    className={className}> 
+                    className="button button__start"
+                > 
                     Won  Point
                 </Button>
-                Score {props.namePlayerTwo}: {pointsPlayerTwo}
+                <span className="game-player__score">{pointsPlayerTwo}</span>
+  
             </div>
-           <div>
+           
+            <div className="score__container">
                <Button 
                     onClick={()=> resetGame()}
-                    className={className}> 
+                    className= "button button__reset"       
+                > 
                     Reset Game
                 </Button>
             </div>
-            <h1>{score}</h1>
         </div>
     )    
 }

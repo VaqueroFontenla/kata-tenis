@@ -8,11 +8,12 @@ interface Props {
 
 export const Player = (props: Props) => {
   return (
-    <form>
-        <label>Player</label>
+    <form className="player">
+        <label className="player__label">Player</label>
         <input
             type = 'text'
             name = 'username'
+            className="player__input"
             value = {props.currentUserName}
             onChange={props.onChangeUserName}
              />
