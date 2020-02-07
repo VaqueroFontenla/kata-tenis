@@ -28,11 +28,40 @@
 
 
 .score {
-    font-size: 2rem;
+    font-size: 3rem;
     color: yellow;
+    font-weight: 900;
 }
 
 .reset {
     display:flex;
     justify-content: center;
 }
+.winner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+.animated {
+    font-size: 10rem;
+    color: yellow;
+    animation-duration: 2s;
+    animation-name: winner;
+    animation-iteration-count: 1;
+    animation-timing-function: linear;
+}
+
+@keyframes winner {
+    from {
+      transform: scale(10) rotate(-150deg);
+      opacity: 0;
+      color: white;
+    }
+  
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
