@@ -5,6 +5,7 @@ import './Game.css';
 interface Props {
     namePlayerOne: string;
     namePlayerTwo: string;
+    winner: string;
     setWinner: (winner: string) => void;
 }
   
@@ -176,7 +177,7 @@ export const Game = (props: Props) => {
             </div>
             { isWinner &&
                 <div className="winner-container">
-                    <div className="animated">Winner Game {winner} !</div>
+                    <div className="animated">Winner Game {props.winner} !</div>
                 </div>
             }
            

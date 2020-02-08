@@ -65,8 +65,9 @@ const App = () => {
           <div className="wrapper">
             <Panel players={players}/>
             <Game
-              namePlayerOne={namePlayerOne}
-              namePlayerTwo={namePlayerTwo}
+              namePlayerOne = {namePlayerOne}
+              namePlayerTwo = {namePlayerTwo}
+              winner = {winner }
               setWinner = {setWinner}
             />
           </div>
