@@ -4,7 +4,8 @@ import './Panel.css';
 
 
 interface Props {
-    players: PlayerModel[];
+    playerOne: PlayerModel;
+    playerTwo: PlayerModel;
 }
   
 export const Panel = (props: Props) => {
@@ -20,14 +21,18 @@ export const Panel = (props: Props) => {
                     </tr>
                </thead>
                <tbody className="panel__table--body">
-                    { props.players.map( (player,id) => 
-                        <tr key = {id}>  
-                            <td>{player.name}</td>
-                            <td>{player.sets}</td>
-                            <td>{player.games}</td>
-                            <td>{player.points}</td>
-                        </tr> 
-                    )}
+                    <tr>  
+                        <td>{props.playerOne.name}</td>
+                        <td>{props.playerOne.sets}</td>
+                        <td>{props.playerOne.games}</td>
+                        <td>{props.playerOne.points}</td>
+                    </tr> 
+                    <tr>  
+                        <td>{props.playerTwo.name}</td>
+                        <td>{props.playerTwo.sets}</td>
+                        <td>{props.playerTwo.games}</td>
+                        <td>{props.playerTwo.points}</td>
+                    </tr>
                 </tbody>
                 <tfoot>
                     <tr>

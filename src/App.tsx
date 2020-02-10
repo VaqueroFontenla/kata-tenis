@@ -10,28 +10,32 @@ import './App.css';
 
 const App = () => {
 
-  const [namePlayerOne, setnamePlayerOne] = React.useState<string>('');
-  const [namePlayerTwo, setnamePlayerTwo] = React.useState<string>('');
+  const initialPlayer = {
+    name: '',
+    sets: 0,
+    games: 0,
+    points: 0
+  };
+
   const [winner, setWinner] = React.useState<string>('');
-  const [players, setPlayers] = React.useState<PlayerModel[]>([]);
-  const [showGame, setShowGame] = React.useState(false);
+  const [playerOne, setPlayerOne] = React.useState<PlayerModel>(initialPlayer);
+  const [playerTwo, setPlayerTwo] = React.useState<PlayerModel>(initialPlayer);
+  const [showGame, setShowGame] = React.useState<boolean>(false);
 
   const onChangenamePlayerOne = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setnamePlayerOne(event.target.value);
+    setPlayerOne({ ...playerOne, name: event.target.value })
   }
+
   const onChangenamePlayerTwo = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setnamePlayerTwo(event.target.value);
+    setPlayerTwo({ ...playerTwo, name: event.target.value })
   }
 
   const onResetPlayer = () => {
-    setnamePlayerOne('');
-    setnamePlayerTwo('');
+    setPlayerOne({ ...playerOne, name: '' })
+    setPlayerTwo({ ...playerTwo, name:'' })
   }
   const onShowGame = () => setShowGame(true);
 
-  React.useEffect(()=> {
-    
- },[namePlayerOne,namePlayerOne, winner]); 
 
   return (
     <div className="App">
@@ -39,11 +43,11 @@ const App = () => {
         <div className="wrapper">
           <div className="player__container">
             <Player 
-              currentUserName={namePlayerOne}
+              currentUserName={playerOne.name}
               onChangeUserName={onChangenamePlayerOne}
             />
             <Player 
-              currentUserName={namePlayerTwo}
+              currentUserName={playerTwo.name}
               onChangeUserName={onChangenamePlayerTwo}
             />
           </div>
@@ -63,10 +67,13 @@ const App = () => {
         }
         {showGame &&
           <div className="wrapper">
-            <Panel players={players}/>
+            <Panel 
+              playerOne = {playerOne}
+              playerTwo = {playerTwo}
+            />
             <Game
-              namePlayerOne = {namePlayerOne}
-              namePlayerTwo = {namePlayerTwo}
+              namePlayerOne = {playerOne.name}
+              namePlayerTwo = {playerTwo.name}
               winner = {winner }
               setWinner = {setWinner}
             />
