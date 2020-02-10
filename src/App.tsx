@@ -17,10 +17,10 @@ const App = () => {
     points: 0
   };
 
-  const [winner, setWinner] = React.useState<string>('');
   const [playerOne, setPlayerOne] = React.useState<PlayerModel>(initialPlayer);
   const [playerTwo, setPlayerTwo] = React.useState<PlayerModel>(initialPlayer);
   const [showGame, setShowGame] = React.useState<boolean>(false);
+  const [winnerGame , setWinnerGame] =  React.useState<string>('')
 
   const onChangenamePlayerOne = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPlayerOne({ ...playerOne, name: event.target.value })
@@ -35,8 +35,36 @@ const App = () => {
     setPlayerTwo({ ...playerTwo, name:'' })
   }
   const onShowGame = () => setShowGame(true);
+  
+  const addPointsToPlayer = (playerName: string, playerPoints: number ): void => {
+    if ( playerName === playerOne.name) {
+      setPlayerOne({ ... playerOne, points: playerPoints})
+    } else if (playerName === playerTwo.name) {
+      setPlayerTwo({ ... playerTwo, points: playerPoints})
+    }
+  }
 
+  const addGameToPlayer = ((playerName: string): void => {
+    const sum: number = 1;
+    if ( playerName === playerOne.name) {
+      setPlayerOne({ ... playerOne, games: sum})
+      console.log(playerOne);
+    } else if (playerName === playerTwo.name) {
+      setPlayerTwo({ ... playerTwo, games:  sum })
+      console.log(playerTwo);
+    }
+  });
 
+  React.useEffect(()=> {
+    if (playerOne.games > 6) {
+      setPlayerOne({ ...playerOne, sets: playerOne.sets + 1})
+    }
+
+    if (playerTwo.games > 6) {
+      setPlayerOne({ ...playerTwo, sets: playerTwo.sets + 1})
+    }
+  },[playerOne, playerTwo])
+   
   return (
     <div className="App">
       { !showGame && 
@@ -72,10 +100,10 @@ const App = () => {
               playerTwo = {playerTwo}
             />
             <Game
-              namePlayerOne = {playerOne.name}
-              namePlayerTwo = {playerTwo.name}
-              winner = {winner }
-              setWinner = {setWinner}
+              playerOne = {playerOne}
+              playerTwo = {playerTwo}
+              addPointsToPlayer = {addPointsToPlayer}
+              addGameToPlayer = {addGameToPlayer}
             />
           </div>
         }

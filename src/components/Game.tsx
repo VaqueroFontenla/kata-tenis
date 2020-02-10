@@ -1,12 +1,13 @@
 import * as React from "react";
 import { Button } from './Button';
+import { PlayerModel } from "../models/Player";
 import './Game.css';
 
 interface Props {
-    namePlayerOne: string;
-    namePlayerTwo: string;
-    winner: string;
-    setWinner: (winner: string) => void;
+    playerOne: PlayerModel;
+    playerTwo: PlayerModel;
+    addPointsToPlayer: (playerName: string, playerPoints: number) => void;
+    addGameToPlayer: (playerName: string) => void;
 }
   
 export const Game = (props: Props) => {
@@ -17,8 +18,7 @@ export const Game = (props: Props) => {
     const [ scorePlayerTwo, setScorePlayerTwo] = React.useState<number>(0);
     const [ showPoints, setShowPoints] = React.useState<boolean>(true);
     const [ isWinner, setIsWinner] = React.useState<boolean>(false);
-    const [ pointsPlayerOne, setPointsPlayerOne] = React.useState<number>(0);
-    const [ pointsPlayerTwo, setPointsPlayerTwo] = React.useState<number>(0);
+    const [ winner, setWinner ] = React.useState<string>('');
 
     const transformScore = (score:number) => {
         switch(score) {
@@ -41,8 +41,9 @@ export const Game = (props: Props) => {
 
     const finishGame = (winner:string): any => {
         setScoreList([]);
-        props.setWinner(winner);
+        setWinner(winner);
         setIsWinner(true);
+        props.addGameToPlayer(winner);
     }
 
     React.useEffect(()=> {
@@ -70,28 +71,25 @@ export const Game = (props: Props) => {
                             setScore('Deuce');
                             break;
                         case 1: 
-                            setScore(`Advantage ${props.namePlayerOne}`);
+                            setScore(`Advantage ${props.playerOne.name}`);
                             break;
                         case -1: 
-                            setScore(`Advantage ${props.namePlayerTwo}`);
+                            setScore(`Advantage ${props.playerTwo.name}`);
                             break;
                         
                         case 2: 
-                            finishGame(props.namePlayerOne);
+                            finishGame(props.playerOne.name);
                             break;
                         case -2:
-                            finishGame(props.namePlayerTwo);
+                            finishGame(props.playerTwo.name);
                             break;
                     }
                 } else {
                    if (scorePlayerOne === 4) {
-                        setScore(`Advantage ${props.namePlayerOne}`);
-                   } else if(scorePlayerOne === 5) {
-                        finishGame(props.namePlayerOne);
-                   } else if (scorePlayerTwo === 4) {
-                        setScore(`Advantage ${props.namePlayerTwo}`);
-                   } else if(scorePlayerTwo === 5) {
-                        finishGame(props.namePlayerTwo);
+                        finishGame(props.playerOne.name);
+                   } 
+                   else if (scorePlayerTwo === 4) {
+                        finishGame(props.playerTwo.name);
                    }
                 }
             } else {   
@@ -113,27 +111,25 @@ export const Game = (props: Props) => {
             case 1: {
                 return 15
             }
-            case 2:{
+            case 2: {
                 return 30
             }
-            case 3:{
+            case 3: {
                 return 40
             }
-            default :
-                setShowPoints(false)  
+            default: {
+                return ""
+            }
+                  
         }
     }
 
-    React.useEffect(()=> {
-       setPointsPlayerOne(checkPoinstPlayer(scorePlayerOne))
-       setPointsPlayerTwo(checkPoinstPlayer(scorePlayerTwo))
-    },[scorePlayerOne,scorePlayerTwo]); 
-
     const wonPoint = (playerName : string) => {
-        if (playerName === props.namePlayerOne)
+        if (playerName === props.playerOne.name) {
             setScorePlayerOne(scorePlayerOne + 1);
-        else if  (playerName === props.namePlayerTwo)
+        } else if (playerName === props.playerTwo.name){
             setScorePlayerTwo(scorePlayerTwo + 1);
+        }     
     }
 
     const resetGame = () => {
@@ -142,19 +138,24 @@ export const Game = (props: Props) => {
         setScoreList([]);
         setIsWinner(false);
     }
+
+    React.useEffect(()=> {
+        props.addPointsToPlayer(props.playerOne.name, checkPoinstPlayer(scorePlayerOne));
+        props.addPointsToPlayer(props.playerTwo.name, checkPoinstPlayer(scorePlayerTwo));
+    },[scorePlayerOne, scorePlayerTwo])
   
     return (
         <div className="game-container">
             <div className="game">
                 <div className="game-player">
-                    <span className="game-player__label">{props.namePlayerOne}</span>
+                    <span className="game-player__label">{props.playerOne.name}</span>
                     <Button 
-                        onClick={()=> wonPoint(props.namePlayerOne)}
+                        onClick={()=> wonPoint(props.playerOne.name)}
                         className="button button__start"
                     >
                         Won Point
                     </Button>
-                    <span className="game-player__score">{pointsPlayerOne}</span>
+                    <span className="game-player__score">{props.playerOne.points}</span>
                 </div>
 
                 <div className="game-score">
@@ -164,20 +165,20 @@ export const Game = (props: Props) => {
                 </div>
 
                 <div className="game-player">
-                    <span  className="game-player__label">{props.namePlayerTwo}</span>
+                    <span  className="game-player__label">{props.playerTwo.name}</span>
                     <Button 
-                        onClick={()=> wonPoint(props.namePlayerTwo)}
+                        onClick={()=> wonPoint(props.playerTwo.name)}
                         className="button button__start"
                     > 
                         Won  Point
                     </Button>
-                    <span className="game-player__score">{pointsPlayerTwo}</span>
+                    <span className="game-player__score">{props.playerTwo.points}</span>
     
                 </div>
             </div>
             { isWinner &&
                 <div className="winner-container">
-                    <div className="animated">Winner Game {props.winner} !</div>
+                    <div className="animated">Winner Game {winner} !</div>
                 </div>
             }
            

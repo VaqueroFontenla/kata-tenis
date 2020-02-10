@@ -1,7 +1,7 @@
 .panel {
  height: 20vh;
  display: flex;
- justify-content: flex-end;
+ justify-content: center;
  align-items: center;
 }
 
@@ -10,11 +10,19 @@
     border: 0.33rem solid #000080;
     border-radius: 1rem;
     font-size: 1.5rem;
+    text-align: center;
+    padding: 1rem;
 
 }
 .panel__table--header {
+    border-bottom: 0.33rem solid #000080;
 
 }
+
 .panel__table--body {
 
+}
+
+.panel__table--footer {
+    border-top: 0.33rem solid #000080;
 }
