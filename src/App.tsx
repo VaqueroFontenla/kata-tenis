@@ -44,16 +44,13 @@ const App = () => {
     }
   }
 
-  const addGameToPlayer = ((playerName: string): void => {
-    const sum: number = 1;
+  const addGameToPlayer = (playerName: string): void => {
     if ( playerName === playerOne.name) {
-      setPlayerOne({ ... playerOne, games: sum})
-      console.log(playerOne);
+      setPlayerOne({ ... playerOne, games: playerOne.games + 1 })
     } else if (playerName === playerTwo.name) {
-      setPlayerTwo({ ... playerTwo, games:  sum })
-      console.log(playerTwo);
+      setPlayerTwo({ ... playerTwo, games: 1, points: 0})
     }
-  });
+  };
 
   React.useEffect(()=> {
     if (playerOne.games > 6) {

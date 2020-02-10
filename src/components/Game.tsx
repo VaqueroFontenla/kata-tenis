@@ -118,7 +118,7 @@ export const Game = (props: Props) => {
                 return 40
             }
             default: {
-                return ""
+                return 0
             }
                   
         }
@@ -126,7 +126,7 @@ export const Game = (props: Props) => {
 
     const wonPoint = (playerName : string) => {
         if (playerName === props.playerOne.name) {
-            setScorePlayerOne(scorePlayerOne + 1);
+            setScorePlayerOne(scorePlayerOne + 1);           
         } else if (playerName === props.playerTwo.name){
             setScorePlayerTwo(scorePlayerTwo + 1);
         }     
@@ -178,7 +178,8 @@ export const Game = (props: Props) => {
             </div>
             { isWinner &&
                 <div className="winner-container">
-                    <div className="animated">Winner Game {winner} !</div>
+                    {winner}
+                    {/* <div className="animated">Winner Game {winner} !</div> */}
                 </div>
             }
            
