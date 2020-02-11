@@ -26,9 +26,12 @@ describe("Game functionality", () => {
     expect(result).toBe("Winner Two");
   });
   it("different scores during match", () => {
-      scoreValues.map( scoreValue => {
-        const result = getFormattedScore(scoreValue.scorePlayerOne, scoreValue.scorePlayerTwo);
-        expect(result).toBe(scoreValue.score);
-      })
-  })
+    scoreValues.map(scoreValue => {
+      const result = getFormattedScore(
+        scoreValue.scorePlayerOne,
+        scoreValue.scorePlayerTwo
+      );
+      expect(result).toBe(scoreValue.score);
+    });
+  });
 });
