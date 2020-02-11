@@ -1,4 +1,4 @@
-import { wonPoint, constructor, getFormattedScore } from "./game";
+import { wonPoint, constructor, getFormattedScore, wonGame } from "./game";
 import { scoreValues } from "./game-score-values";
 
 describe("Game functionality", () => {
@@ -34,4 +34,29 @@ describe("Game functionality", () => {
       expect(result).toBe(scoreValue.score);
     });
   });
+  it("player one win game", () => {
+    wonPoint("One");
+    getFormattedScore(4, 0);
+    const result = wonGame('One')
+    expect(result).toBe(1);
+  });
+  it("player two win game", () => {
+    wonPoint("Two");
+    getFormattedScore(0, 4);
+    const result = wonGame('Two')
+    expect(result).toBe(1);
+  });
+  it("player one win set", () => {
+    wonPoint("One");
+    getFormattedScore(4, 0);
+    const result = wonGame('One')
+    expect(result).toBe(1);
+  });
+  it("player two win set", () => {
+    wonPoint("Two");
+    getFormattedScore(4, 0);
+    const result = wonGame('Two')
+    expect(result).toBe(1);
+  });
+
 });
