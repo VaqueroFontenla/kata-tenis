@@ -37,6 +37,7 @@
     ]
   },
   "devDependencies": {
+    "prettier": "^1.19.1",
     "react-hot-loader": "^4.12.19"
   }
 }
