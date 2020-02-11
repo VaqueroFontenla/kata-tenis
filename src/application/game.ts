@@ -44,17 +44,17 @@ export const getFormattedScore = (
       scoreString = `${scoreArray[scoreOne]} - all`;
     }
   } else {
-    if (scoreOne >= 3 || scoreTwo >= 3) {
+    if (scoreOne > 3 || scoreTwo > 3) {
       const winner = selectWinner(scoreDifference);
       if (scoreDifference === 0) {
         scoreString = scoreString = "Deuce";
       }
 
       if (scoreDifference === 1 || scoreDifference === -1) {
-        scoreString = ` Advantage ${winner}`;
+        scoreString = `Advantage ${winner}`;
       }
 
-      if (scoreDifference === 2 || scoreDifference === -2) {
+      if (scoreDifference >= 2 || scoreDifference <= -2) {
         scoreString = `Winner ${winner}`;
       }
     } else {

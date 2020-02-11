@@ -1,4 +1,5 @@
 import { wonPoint, constructor, getFormattedScore } from "./game";
+import { scoreValues } from "./game-score-values";
 
 describe("Game functionality", () => {
   beforeEach(() => {
@@ -24,4 +25,10 @@ describe("Game functionality", () => {
     const result = getFormattedScore(3, 5);
     expect(result).toBe("Winner Two");
   });
+  it("different scores during match", () => {
+      scoreValues.map( scoreValue => {
+        const result = getFormattedScore(scoreValue.scorePlayerOne, scoreValue.scorePlayerTwo);
+        expect(result).toBe(scoreValue.score);
+      })
+  })
 });
