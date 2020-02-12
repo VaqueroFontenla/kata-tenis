@@ -20,16 +20,16 @@ export const scoreValues: ScoreValue[] = [
     scorePlayerTwo: 2,
     score: "Thirty - all"
   },
-  //   {
-  //     scorePlayerOne: 3,
-  //     scorePlayerTwo: 3,
-  //     score: "Deuce"
-  //   },
-  //   {
-  //     scorePlayerOne: 4,
-  //     scorePlayerTwo: 4,
-  //     score: "Deuce"
-  //   },
+    {
+      scorePlayerOne: 3,
+      scorePlayerTwo: 3,
+      score: "Deuce"
+    },
+    {
+      scorePlayerOne: 4,
+      scorePlayerTwo: 4,
+      score: "Deuce"
+    },
   {
     scorePlayerOne: 1,
     scorePlayerTwo: 0,
