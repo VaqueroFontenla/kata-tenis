@@ -40,19 +40,12 @@ export const wonPoint = (playerName: string): void => {
 };
 
 export const wonGame = (playerName: string): void => {
-  //No entiendo el error
-  if (gamesPlayerOne > 6 || gamesPlayerTwo > 6) {
-    wonSet(playerName);
-    resetGames();
-  } else {
     if (playerName === playerOneName) {
       gamesPlayerOne++;
     }
     if (playerName === playerTwoName) {
       gamesPlayerTwo++;
     }
-  }
-  resetScore();
 };
 
 export const wonSet = (playerName: string): void => {

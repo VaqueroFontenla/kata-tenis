@@ -1,173 +1,78 @@
 export interface ScoreValue {
-  scorePlayerOne: number;
-  scorePlayerTwo: number;
+  description: string;
+  playersPoints: string[];
   score: string;
 }
 
 export const scoreValues: ScoreValue[] = [
   {
-    scorePlayerOne: 0,
-    scorePlayerTwo: 0,
-    score: "Love - all"
-  },
-  {
-    scorePlayerOne: 1,
-    scorePlayerTwo: 1,
-    score: "Fifteen - all"
-  },
-  {
-    scorePlayerOne: 2,
-    scorePlayerTwo: 2,
-    score: "Thirty - all"
-  },
-    {
-      scorePlayerOne: 3,
-      scorePlayerTwo: 3,
-      score: "Deuce"
-    },
-    {
-      scorePlayerOne: 4,
-      scorePlayerTwo: 4,
-      score: "Deuce"
-    },
-  {
-    scorePlayerOne: 1,
-    scorePlayerTwo: 0,
+    description: "player one win first point",
+    playersPoints: ["One"],
     score: "Fifteen - Love"
   },
   {
-    scorePlayerOne: 0,
-    scorePlayerTwo: 1,
+    description: "player two win first point",
+    playersPoints: ["Two"],
     score: "Love - Fifteen"
   },
   {
-    scorePlayerOne: 2,
-    scorePlayerTwo: 0,
+    description: "player one and player two has one point each",
+    playersPoints: ["One","Two"],
+    score: "Fifteen all"
+  },
+  {
+    description: "player one and player two just start the game",
+    playersPoints: [],
+    score: "Love all"
+  },
+  {
+    description: "player one win the game",
+    playersPoints: ["One", "One", "One" , "One"],
+    score: "Winner One"
+  },
+  {
+    description: "player two win the game",
+    playersPoints: ["Two", "Two", "Two" , "Two"],
+    score: "Winner Two"
+  },
+  {
+    description: "player one and player two are in deuce",
+    playersPoints: ["One","One","One", "Two", "Two" , "Two"],
+    score: "Deuce"
+  },
+  {
+    description: "player one has advantage after deuce",
+    playersPoints: ["One","One","One", "Two", "Two" , "Two", "One"],
+    score: "Advantage One"
+  },
+  {
+    description: "player two has advantage after deuce",
+    playersPoints: ["One","One","One", "Two", "Two" , "Two", "Two"],
+    score: "Advantage Two"
+  },
+  {
+    description: "players are in deuce after player two has advantage",
+    playersPoints: ["One","One","One", "Two", "Two" , "Two", "Two","One"],
+    score: "Deuce"
+  },
+  {
+    description: "players two win the game after deuce",
+    playersPoints: ["One","One","One", "Two", "Two" , "Two", "Two","Two"],
+    score: "Winner Two"
+  },
+  {
+    description: "players one win the game after deuce",
+    playersPoints: ["One","One","One", "Two", "Two" , "Two", "One","One"],
+    score: "Winner One"
+  },
+  {
+    description: "player one win 2 points",
+    playersPoints: ["One","One"],
     score: "Thirty - Love"
   },
   {
-    scorePlayerOne: 0,
-    scorePlayerTwo: 2,
-    score: "Love - Thirty"
-  },
-  {
-    scorePlayerOne: 3,
-    scorePlayerTwo: 0,
+    description: "player one win 3 points",
+    playersPoints: ["One","One", "One"],
     score: "Forty - Love"
-  },
-  {
-    scorePlayerOne: 0,
-    scorePlayerTwo: 3,
-    score: "Love - Forty"
-  },
-  {
-    scorePlayerOne: 4,
-    scorePlayerTwo: 0,
-    score: "Winner One"
-  },
-  {
-    scorePlayerOne: 0,
-    scorePlayerTwo: 4,
-    score: "Winner Two"
-  },
-  {
-    scorePlayerOne: 2,
-    scorePlayerTwo: 1,
-    score: "Thirty - Fifteen"
-  },
-  {
-    scorePlayerOne: 1,
-    scorePlayerTwo: 2,
-    score: "Fifteen - Thirty"
-  },
-  {
-    scorePlayerOne: 3,
-    scorePlayerTwo: 1,
-    score: "Forty - Fifteen"
-  },
-  {
-    scorePlayerOne: 1,
-    scorePlayerTwo: 3,
-    score: "Fifteen - Forty"
-  },
-  {
-    scorePlayerOne: 4,
-    scorePlayerTwo: 1,
-    score: "Winner One"
-  },
-  {
-    scorePlayerOne: 1,
-    scorePlayerTwo: 4,
-    score: "Winner Two"
-  },
-  {
-    scorePlayerOne: 3,
-    scorePlayerTwo: 2,
-    score: "Forty - Thirty"
-  },
-  {
-    scorePlayerOne: 2,
-    scorePlayerTwo: 3,
-    score: "Thirty - Forty"
-  },
-  {
-    scorePlayerOne: 4,
-    scorePlayerTwo: 2,
-    score: "Winner One"
-  },
-  {
-    scorePlayerOne: 2,
-    scorePlayerTwo: 4,
-    score: "Winner Two"
-  },
-  {
-    scorePlayerOne: 4,
-    scorePlayerTwo: 3,
-    score: "Advantage One"
-  },
-  {
-    scorePlayerOne: 3,
-    scorePlayerTwo: 4,
-    score: "Advantage Two"
-  },
-  {
-    scorePlayerOne: 5,
-    scorePlayerTwo: 4,
-    score: "Advantage One"
-  },
-  {
-    scorePlayerOne: 4,
-    scorePlayerTwo: 5,
-    score: "Advantage Two"
-  },
-  {
-    scorePlayerOne: 15,
-    scorePlayerTwo: 14,
-    score: "Advantage One"
-  },
-  {
-    scorePlayerOne: 14,
-    scorePlayerTwo: 15,
-    score: "Advantage Two"
-  },
-  {
-    scorePlayerOne: 6,
-    scorePlayerTwo: 4,
-    score: "Winner One"
-  },
-  {
-    scorePlayerOne: 4,
-    scorePlayerTwo: 6,
-    score: "Winner Two"
-  },
-  {
-    scorePlayerOne: 16,
-    scorePlayerTwo: 14,
-    score: "Winner One"
-  },
-  {
-    scorePlayerOne: 14,
-    scorePlayerTwo: 16,
-    score: "Winner Two"
-  }
+  }  
 ];
