@@ -1,5 +1,11 @@
-import { wonPoint, constructor, getFormattedScore, wonGame } from "./game";
-import { scoreValues } from "./game-score-values";
+import {
+  wonPoint,
+  constructor,
+  getFormattedScore,
+  wonGame,
+  getScore
+} from "./game";
+// import { scoreValues } from "./game-score-values";
 
 describe("Game functionality", () => {
   beforeEach(() => {
@@ -7,56 +13,170 @@ describe("Game functionality", () => {
   });
   it("player one win first point", () => {
     wonPoint("One");
-    const result = getFormattedScore(1, 0);
+    const result = getScore();
     expect(result).toBe("Fifteen - Love");
   });
-  it("player two win first point", () => {
-    wonPoint("Two");
-    const result = getFormattedScore(0, 1);
-    expect(result).toBe("Love - Fifteen");
-  });
-  it("player one win match", () => {
+  it("player one and player two has one point each", () => {
     wonPoint("One");
-    const result = getFormattedScore(5, 3);
+    wonPoint("Two");
+    const result = getScore();
+    expect(result).toBe("Fifteen all");
+  });
+  it("player one and player two just start the game", () => {
+    const result = getScore();
+    expect(result).toBe("Love all");
+  });
+  it("player one win the game", () => {
+    wonPoint("One");
+    wonPoint("One");
+    wonPoint("One");
+    wonPoint("One");
+    const result = getScore();
     expect(result).toBe("Winner One");
   });
-  it("player two win match", () => {
+  it("player two win the game", () => {
     wonPoint("Two");
-    const result = getFormattedScore(3, 5);
+    wonPoint("Two");
+    wonPoint("Two");
+    wonPoint("Two");
+    const result = getScore();
     expect(result).toBe("Winner Two");
   });
-  it("different scores during match", () => {
-    scoreValues.map(scoreValue => {
-      const result = getFormattedScore(
-        scoreValue.scorePlayerOne,
-        scoreValue.scorePlayerTwo
-      );
-      expect(result).toBe(scoreValue.score);
-    });
-  });
-  it("player one win game", () => {
+  it("player one and player two are in deuce", () => {
     wonPoint("One");
-    getFormattedScore(4, 0);
-    const result = wonGame('One')
-    expect(result).toBe(1);
-  });
-  it("player two win game", () => {
-    wonPoint("Two");
-    getFormattedScore(0, 4);
-    const result = wonGame('Two')
-    expect(result).toBe(1);
-  });
-  it("player one win set", () => {
     wonPoint("One");
-    getFormattedScore(4, 0);
-    const result = wonGame('One')
-    expect(result).toBe(1);
-  });
-  it("player two win set", () => {
+    wonPoint("One");
     wonPoint("Two");
-    getFormattedScore(4, 0);
-    const result = wonGame('Two')
-    expect(result).toBe(1);
-  });
+    wonPoint("Two");
+    wonPoint("Two");
 
+    const result = getScore();
+    expect(result).toBe("Deuce");
+  });
+  it("player one has advantage after deuce", () => {
+    wonPoint("One");
+    wonPoint("One");
+    wonPoint("One");
+    wonPoint("Two");
+    wonPoint("Two");
+    wonPoint("Two");
+    wonPoint("One");
+
+    const result = getScore();
+    expect(result).toBe("Advantage One");
+  });
+  it("player two has advantage after deuce", () => {
+    wonPoint("One");
+    wonPoint("One");
+    wonPoint("One");
+    wonPoint("Two");
+    wonPoint("Two");
+    wonPoint("Two");
+    wonPoint("Two");
+
+    const result = getScore();
+    expect(result).toBe("Advantage Two");
+  });
+  it("players are in deuce after player two has advantage", () => {
+    wonPoint("One");
+    wonPoint("One");
+    wonPoint("One");
+    wonPoint("Two");
+    wonPoint("Two");
+    wonPoint("Two");
+    wonPoint("Two");
+    wonPoint("One");
+
+    const result = getScore();
+    expect(result).toBe("Deuce");
+  });
+  it("players two win the game after deuce", () => {
+    wonPoint("One");
+    wonPoint("One");
+    wonPoint("One");
+    wonPoint("Two");
+    wonPoint("Two");
+    wonPoint("Two");
+    wonPoint("Two");
+    wonPoint("Two");
+
+    const result = getScore();
+    expect(result).toBe("Winner Two");
+  });
+  it("players one win the game after deuce", () => {
+    wonPoint("One");
+    wonPoint("One");
+    wonPoint("One");
+    wonPoint("Two");
+    wonPoint("Two");
+    wonPoint("Two");
+    wonPoint("One");
+    wonPoint("One");
+
+    const result = getScore();
+    expect(result).toBe("Winner One");
+  });
+  it("players one win 2 points", () => {
+    wonPoint("One");
+    wonPoint("One");
+
+    const result = getScore();
+    expect(result).toBe("Thirty - Love");
+  });
+  it("players one win 3 points", () => {
+    wonPoint("One");
+    wonPoint("One");
+    wonPoint("One");
+
+    const result = getScore();
+    expect(result).toBe("Forty - Love");
+  });
+  // it("player two win first point", () => {
+  //   wonPoint("Two");
+  //   const result = getFormattedScore(0, 1);
+  //   expect(result).toBe("Love - Fifteen");
+  // });
+  // it("player one win match", () => {
+  //   wonPoint("One");
+  //   const result = getFormattedScore(5, 3);
+  //   expect(result).toBe("Winner One");
+  // });
+  // it("player two win match", () => {
+  //   wonPoint("Two");
+  //   const result = getFormattedScore(3, 5);
+  //   expect(result).toBe("Winner Two");
+  // });
+  // it("different scores during match", () => {
+  //   scoreValues.map(scoreValue => {
+  //     const result = getFormattedScore(
+  //       scoreValue.scorePlayerOne,
+  //       scoreValue.scorePlayerTwo
+  //     );
+  //     expect(result).toBe(scoreValue.score);
+  //   });
+  // });
+  // it("player one win game", () => {
+  //   wonPoint("One");
+  //   getFormattedScore(4, 0);
+  //   const result = wonGame('One')
+  //   expect(result).toBe(1);
+  // });
+  // it("player two win game", () => {
+  //   wonPoint("Two");
+  //   getFormattedScore(0, 4);
+  //   const result = wonGame('Two')
+  //   expect(result).toBe(1);
+  // });
+  // it("player one win set", () => {
+  //   wonPoint("One");
+  //   getFormattedScore(4, 0);
+  //   const result = wonGame('One')
+  //   expect(result).toBe(1);
+  // });
+  // it("player two win set", () => {
+  //   wonPoint("Two");
+  //   getFormattedScore(4, 0);
+  //   const result = wonGame('Two')
+  //   expect(result).toBe(1);
+  // });
 });
