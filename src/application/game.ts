@@ -30,22 +30,34 @@ export const reset = () => {
   resetGames();
 };
 
+export const selectWinner = (difference: number) => {
+  let winner: string = "";
+  if (difference > 0) {
+    winner = playerOneName;
+  }
+  if (difference < 0) {
+    winner = playerTwoName;
+  }
+  return winner;
+};
+
 export const wonPoint = (playerName: string): void => {
-    if (playerName === playerOneName) {
-      scorePlayerOne++;
-    }
-    if (playerName === playerTwoName) {
-      scorePlayerTwo++;
-    }
+  if (playerName === playerOneName) {
+    scorePlayerOne++;
+  }
+  if (playerName === playerTwoName) {
+    scorePlayerTwo++;
+  }
 };
 
 export const wonGame = (playerName: string): void => {
-    if (playerName === playerOneName) {
-      gamesPlayerOne++;
-    }
-    if (playerName === playerTwoName) {
-      gamesPlayerTwo++;
-    }
+  if (playerName === playerOneName) {
+    gamesPlayerOne++;
+  }
+  if (playerName === playerTwoName) {
+    gamesPlayerTwo++;
+  }
+  resetScore();
 };
 
 export const wonSet = (playerName: string): void => {
@@ -58,20 +70,42 @@ export const wonSet = (playerName: string): void => {
   resetGames();
 };
 
-export const transformScore = (score: number) => scoreArray[score];
+export const wonParty = (playerName: string): void => {
+  console.log(playerName)
+}
 
-export const selectWinner = (scoreDifference: number) => {
-  let winner: string = "";
-  if (scoreDifference > 0) {
-    winner = playerOneName;
+export const getWinnerMatch = (
+  setsPlayerOne: number,
+  setsPlayerTwo: number
+) => {
+  let setsDifference: number = setsPlayerOne - setsPlayerTwo;
+  if (setsPlayerOne === 3 || setsPlayerTwo === 3) {
+    wonParty(selectWinner(setsDifference));
+  } else {
+    return null;
   }
-  if (scoreDifference < 0) {
-    winner = playerTwoName;
+};
+export const getWinnerSet = (
+  gamesPlayerOne: number,
+  gamesPlayerTwo: number
+) => {
+  let gamesDifference: number = gamesPlayerOne - gamesPlayerTwo;
+  if (
+    (gamesPlayerOne <= 6 || gamesPlayerOne <= 6) &&
+    (gamesDifference === 2 || gamesDifference === -2)
+  ) {
+    wonSet(selectWinner(gamesDifference));
+  } else {
+    return null;
   }
-  return winner;
 };
 
-export const getFormattedScore = (scoreOne: number, scoreTwo: number): string => {
+export const transformScore = (score: number) => scoreArray[score];
+
+export const getFormattedScore = (
+  scoreOne: number,
+  scoreTwo: number
+): string => {
   let score: string = "";
   let scoreDifference: number = scoreOne - scoreTwo;
   if (scoreDifference === 0) {
@@ -90,12 +124,13 @@ export const getFormattedScore = (scoreOne: number, scoreTwo: number): string =>
 
       if (scoreDifference >= 2 || scoreDifference <= -2) {
         score = `Winner ${winner}`;
+        wonGame(winner);
       }
     } else {
       score = `${transformScore(scoreOne)} - ${transformScore(scoreTwo)}`;
     }
   }
-  return score
+  return score;
 };
 
 export const getScore = (): string =>

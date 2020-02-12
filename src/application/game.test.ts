@@ -5,7 +5,7 @@ import {
   wonGame,
   getScore
 } from "./game";
-import { scoreValues } from "./game-score-values";
+import { testScore } from "./game-score-values";
 // import { scoreValues } from "./game-score-values";
 
 // describe("Game functionality", () => {
@@ -115,19 +115,19 @@ import { scoreValues } from "./game-score-values";
 
 // INTENTO DE REFACTORIZAR"
 describe("Game functionality", () => {
- 
   beforeEach(() => {
     constructor("One", "Two");
   });
 
-  scoreValues.map( score => {
+  testScore.map(score => {
     it(score.description, () => {
       score.playersPoints.map(playerPoint => wonPoint(playerPoint));
       const result = getScore();
       expect(result).toBe(score.score);
-    })    
+    });
   });
 
+  // it("players one win game", () => {
 
+  // });
 });
-

@@ -4,7 +4,7 @@ export interface ScoreValue {
   score: string;
 }
 
-export const scoreValues: ScoreValue[] = [
+export const testScore: ScoreValue[] = [
   {
     description: "player one win first point",
     playersPoints: ["One"],
