@@ -1,24 +1,18 @@
 const scoreArray: string[] = ["Love", "Fifteen", "Thirty", "Forty"];
-let score: string = "";
 const initialState: number = 0;
-let scorePlayerOne: number;
-let scorePlayerTwo: number;
-let gamesPlayerOne: number;
-let gamesPlayerTwo: number;
-let setsPlayerOne: number;
-let setsPlayerTwo: number;
+let scorePlayerOne: number = initialState;
+let scorePlayerTwo: number = initialState;
+let gamesPlayerOne: number = initialState;
+let gamesPlayerTwo: number = initialState;
+let setsPlayerOne: number = initialState;
+let setsPlayerTwo: number = initialState;
 let playerOneName: string = "";
 let playerTwoName: string = "";
 
 export const constructor = (playerOne: string, playerTwo: string) => {
   playerOneName = playerOne;
   playerTwoName = playerTwo;
-  scorePlayerOne = initialState;
-  scorePlayerTwo = initialState;
-  gamesPlayerOne = initialState;
-  gamesPlayerTwo = initialState;
-  setsPlayerOne = initialState;
-  setsPlayerTwo = initialState;
+  resetScore();
 };
 
 export const resetScore = () => {
@@ -37,40 +31,36 @@ export const reset = () => {
 };
 
 export const wonPoint = (playerName: string): void => {
-  if (score.includes("Winner")) {
-    wonGame(playerName);
-    resetScore();
-  } else {
     if (playerName === playerOneName) {
       scorePlayerOne++;
     }
     if (playerName === playerTwoName) {
       scorePlayerTwo++;
     }
-  }
 };
 
-export const wonGame = (playerName: string): number => {  //No entiendo el error
+export const wonGame = (playerName: string): void => {
+  //No entiendo el error
   if (gamesPlayerOne > 6 || gamesPlayerTwo > 6) {
     wonSet(playerName);
     resetGames();
   } else {
     if (playerName === playerOneName) {
-      return gamesPlayerOne++;
+      gamesPlayerOne++;
     }
     if (playerName === playerTwoName) {
-      return gamesPlayerTwo++;
+      gamesPlayerTwo++;
     }
   }
   resetScore();
 };
 
-export const wonSet = (playerName: string): number => {
+export const wonSet = (playerName: string): void => {
   if (playerName === playerOneName) {
-    return setsPlayerOne++;
+    setsPlayerOne++;
   }
   if (playerName === playerTwoName) {
-    return setsPlayerTwo++;
+    setsPlayerTwo++;
   }
   resetGames();
 };
@@ -88,36 +78,31 @@ export const selectWinner = (scoreDifference: number) => {
   return winner;
 };
 
-export const getFormattedScore = (
-  scoreOne: number,
-  scoreTwo: number
-): string => {
-  //No entiendo el error
+export const getFormattedScore = (scoreOne: number, scoreTwo: number): string => {
+  let score: string = "";
   let scoreDifference: number = scoreOne - scoreTwo;
   if (scoreDifference === 0) {
     if (scoreOne < 3) {
-      return (score = `${scoreArray[scoreOne]} - all`);
+      score = `${scoreArray[scoreOne]} all`;
+    }
+    if (scoreOne >= 3) {
+      score = "Deuce";
     }
   } else {
     if (scoreOne > 3 || scoreTwo > 3) {
       const winner = selectWinner(scoreDifference);
-      if (scoreDifference === 0) {
-        return (score = score = "Deuce");
-      }
-
       if (scoreDifference === 1 || scoreDifference === -1) {
-        return (score = `Advantage ${winner}`);
+        score = `Advantage ${winner}`;
       }
 
       if (scoreDifference >= 2 || scoreDifference <= -2) {
-        return (score = `Winner ${winner}`);
+        score = `Winner ${winner}`;
       }
     } else {
-      return (score = `${transformScore(scoreOne)} - ${transformScore(
-        scoreTwo
-      )}`);
+      score = `${transformScore(scoreOne)} - ${transformScore(scoreTwo)}`;
     }
   }
+  return score
 };
 
 export const getScore = (): string =>
