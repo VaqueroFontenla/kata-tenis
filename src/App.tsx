@@ -2,7 +2,7 @@ import * as React from "react";
 import { hot } from 'react-hot-loader/root'
 import { Player } from './components/Player';
 import { Button } from './components/Button';
-import { Game } from './components/Game';
+import { GameComponent } from './components/GameComponent';
 import { Panel } from './components/Panel';
 import { PlayerModel } from './models/Player';
 
@@ -92,15 +92,10 @@ const App = () => {
         }
         {showGame &&
           <div className="wrapper">
-            <Panel 
+            <GameComponent
               playerOne = {playerOne}
               playerTwo = {playerTwo}
-            />
-            <Game
-              playerOne = {playerOne}
-              playerTwo = {playerTwo}
-              addPointsToPlayer = {addPointsToPlayer}
-              addGameToPlayer = {addGameToPlayer}
+              
             />
           </div>
         }
