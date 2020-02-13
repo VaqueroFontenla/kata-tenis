@@ -1,5 +1,5 @@
 import * as React from "react";
-import './Button.css';
+import './ButtonComponent.css';
 
 interface Props {
     children: any;
@@ -7,7 +7,7 @@ interface Props {
     onClick: () => void
 }
   
-export const Button = (props: Props) => {
+export const ButtonComponent = (props: Props) => {
     return (
         <button onClick={props.onClick}
             className={props.className}

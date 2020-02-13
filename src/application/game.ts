@@ -3,8 +3,8 @@ const INITIAL_STATE: number = 0;
 const NO_DIFFERENT_SCORE: number = 0;
 const MINIMAL_FOR_DEUCE: number = 3;
 
-let scorePlayerOne: number;
-let scorePlayerTwo: number;
+let scorePlayerOne: number = INITIAL_STATE;
+let scorePlayerTwo: number = INITIAL_STATE;
 let playerOneName: string = "";
 let playerTwoName: string = "";
 
@@ -19,13 +19,15 @@ export const wonPoint = (playerName: string): void => {
   if (playerName === playerOneName) {
     scorePlayerOne++;
   }
-  scorePlayerTwo++;
+  if (playerName === playerTwoName) {
+    scorePlayerTwo++;
+  }
 };
 
 export const getScore = (): string =>
-  getFormattedScore(scorePlayerOne, scorePlayerTwo);
+  getFormattedScore(scorePlayerOne, scorePlayerTwo, playerOneName, playerTwoName);
 
-const selectWinner = (difference: number) => {
+const selectWinner = (difference: number, playerOneName: string, playerTwoName: string) => {
   if (difference > 0) {
     return playerOneName;
   }
@@ -34,7 +36,7 @@ const selectWinner = (difference: number) => {
 
 const transformScore = (score: number) => SCORE_ARRAY[score];
 
-const getFormattedScore = (scoreOne: number, scoreTwo: number): string => {
+export const getFormattedScore = (scoreOne: number, scoreTwo: number, playerOneName: string, playerTwoName: string): string => {
   let scoreDifference: number = scoreOne - scoreTwo;
   if (scoreDifference === NO_DIFFERENT_SCORE && scoreOne < MINIMAL_FOR_DEUCE) {
     return `${transformScore(scoreOne)} all`;
@@ -45,7 +47,7 @@ const getFormattedScore = (scoreOne: number, scoreTwo: number): string => {
   if (scoreOne <= MINIMAL_FOR_DEUCE && scoreTwo <= MINIMAL_FOR_DEUCE) {
     return `${transformScore(scoreOne)} - ${transformScore(scoreTwo)}`;
   }
-  const winner = selectWinner(scoreDifference);
+  const winner = selectWinner(scoreDifference, playerOneName, playerTwoName);
   if (scoreDifference === 1 || scoreDifference === -1) {
     return `Advantage ${winner}`;
   }
@@ -55,5 +57,6 @@ const getFormattedScore = (scoreOne: number, scoreTwo: number): string => {
 export const Game = {
   constructor,
   wonPoint,
-  getScore
+  getScore,
+  getFormattedScore
 };

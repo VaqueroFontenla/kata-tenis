@@ -1,12 +1,12 @@
 import * as React from "react";
-import './Player.css';
+import './PlayerComponent.css';
 
 interface Props {
     currentUserName: string;
     onChangeUserName: (event: React.ChangeEvent<HTMLInputElement>) => void
 }
 
-export const Player = (props: Props) => {
+export const PlayerComponent = (props: Props) => {
   return (
     <form className="player">
         <label className="player__label">Player</label>

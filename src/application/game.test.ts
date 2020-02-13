@@ -1,15 +1,15 @@
-import { wonPoint, constructor, getScore } from "./game";
+import { Game } from "./game";
 import { testScore } from "./game-score-values";
 
 describe("Game functionality", () => {
   beforeEach(() => {
-    constructor("One", "Two");
+    Game.constructor("One", "Two");
   });
 
   testScore.map(score => {
     it(score.description, () => {
-      score.playersPoints.map(playerPoint => wonPoint(playerPoint));
-      const result = getScore();
+      score.playersPoints.map(playerPoint => Game.wonPoint(playerPoint));
+      const result = Game.getScore();
       expect(result).toBe(score.score);
     });
   });

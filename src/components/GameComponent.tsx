@@ -1,77 +1,60 @@
 import * as React from "react";
-import { Button } from './Button';
+import { ButtonComponent } from './ButtonComponent';
 import './GameComponent.css';
-import { Game } from "../application/game";
-import { PlayerModel } from "../models/Player";
 
 interface Props {
-    playerOne: PlayerModel;
-    playerTwo: PlayerModel;
+    playerOne: string;
+    playerTwo: string;
+    scorePlayerOne: number;
+    scorePlayerTwo: number;
+    scoreList: string[];
+    wonPoint: (player: string) => void;
+    resetGame: () => void;
 }
   
 export const GameComponent = (props: Props) => {
-
-    const [ score, setScore] = React.useState<string>('');
-    const [ scoreList, setScoreList] = React.useState<string[]>([''])
-
-    let scorePlayerOne : number;
-    let scorePlayerTwo : number;
-
-    Game.constructor(props.playerOne.name, props.playerTwo.name);
-
-    React.useEffect(()=> {
-        
-       setScore(Game.getScore());
-       console.log(scorePlayerOne, scorePlayerTwo)
-    },[scorePlayerOne , scorePlayerTwo])
-
-    React.useEffect(()=> {
-        let newScore: string[] = [...scoreList, score];
-        setScoreList(newScore);
-
-    },[score])
 
     return (
         <div className="game-container">
             <div className="game">
                 <div className="game-player">
-                    <span className="game-player__label">{props.playerOne.name}</span>
-                    <Button 
-                        onClick={()=> Game.wonPoint(props.playerOne.name)}
+                    <span className="game-player__label">{props.playerOne}</span>
+                    <ButtonComponent 
+                        onClick={()=> props.wonPoint(props.playerOne)}
                         className="button button__start"
                     >
                         Won Point
-                    </Button>
-                    <span className="game-player__score">{props.playerOne.points}</span>
+                    </ButtonComponent>
+                    <span className="game-player__score">{props.scorePlayerOne}</span>
                 </div>
 
                 <div className="game-score">
                     {
-                     scoreList.map( (score,i) => <span key={i} className="score">{score}</span> )
+                     props.scoreList.map( (score,i) => <span key={i} className="score">{score}</span> )
                     }
                 </div>
 
                 <div className="game-player">
-                    <span  className="game-player__label">{props.playerTwo.name}</span>
-                    <Button 
-                        onClick={()=> Game.wonPoint(props.playerTwo.name)}
+                    <span  className="game-player__label">{props.playerTwo}</span>
+                    <ButtonComponent 
+                        onClick={()=> props.wonPoint(props.playerTwo)}
                         className="button button__start"
                     > 
                         Won  Point
-                    </Button>
-                    <span className="game-player__score">{props.playerTwo.points}</span>
+                    </ButtonComponent>
+                    <span className="game-player__score">{props.scorePlayerTwo}</span>
     
                 </div>
             </div>
           
            
             <div className="reset">
-               <Button 
-                    onClick={()=> resetGame()}
+               <ButtonComponent 
+                    onClick={()=> props.resetGame()}
                     className= "button button__reset"       
                 > 
                     Reset Game
-                </Button>
+                </ButtonComponent>
             </div>
         </div>
     )    
