@@ -12,6 +12,8 @@ const App = () => {
   const [playerTwo, setPlayerTwo] = React.useState<string>("");
   const [scorePlayerOne, setScorePlayerOne] = React.useState<number>(0);
   const [scorePlayerTwo, setScorePlayerTwo] = React.useState<number>(0);
+  const [pointsPlayerOne, setPointsPlayerOne] = React.useState<string>("0");
+  const [pointsPlayerTwo, setPointsPlayerTwo] = React.useState<string>("0");
   const [scoreList, setScoreList] = React.useState<string[]>([]);
   const [showGame, setShowGame] = React.useState<boolean>(false);
 
@@ -34,33 +36,66 @@ const App = () => {
 
   const onShowGame = () => {
     setShowGame(true);
-    //Game.constructor(playerOne, playerTwo); 
-    // Teniendo un setPlayerOne, setPlayerTwo y pasarla por props después no śe bien como utilizar el constructor
+    Game.constructor(playerOne, playerTwo);
+  };
+
+  const transformPointOfPlayer = (scorePlayer: number): string => {
+    let newPoint: string = "";
+    if (scorePlayer <= 3) {
+      switch (scorePlayer) {
+        case 0:
+          newPoint = "0";
+          break;
+        case 1:
+          newPoint = "15";
+          break;
+        case 2:
+          newPoint = "30";
+          break;
+        case 3:
+          newPoint = "40";
+          break;
+      }
+    }
+    if (scorePlayer > 3) {
+      newPoint = scoreList[scoreList.length-1];
+    }
+    return newPoint;
+  };
+
+  // Uno de los requerimientos es que: "Debe ser posible obtener la puntuación de dcualquiera de los jugadores en cualquier momento"
+  const setPointOfPlayer = (player: string) => {
+    if (player === playerOne) {
+      setScorePlayerOne(scorePlayerOne + 1);
+    }
+    if (player === playerTwo) {
+      setScorePlayerTwo(scorePlayerTwo + 1);
+    }
   };
 
   const wonPoint = (player: string) => {
-    //Game.wonPoint(player);
-    //Lo mismo teniendo el estado no sé como usar wonPoint definido en game.ts
-    if ( player === playerOne) {
-      setScorePlayerOne(scorePlayerOne + 1)
-    }
-    if ( player === playerTwo) {
-    setScorePlayerTwo(scorePlayerTwo +1)
-    }
+    Game.wonPoint(player);
+    setPointOfPlayer(player);
+  };
+
+  const refreshFunction = (scorePlayerOne: number,scorePlayerTwo :number) => {
+    let newScore: string[] = [...scoreList, Game.getScore()];
+    setScoreList(newScore);
+    //Se supone que esto en síncrono sin embargo, no se actualiza scoreList
+    setPointsPlayerOne(transformPointOfPlayer(scorePlayerOne));
+    setPointsPlayerTwo(transformPointOfPlayer(scorePlayerTwo));
   }
 
-  React.useEffect(()=> {
-    // No he utilizado getScore de game.ts debido a las variables (getScore utiliza variables globales).
-    // Modifiqué la función getFormattedScore para incluir los nombres de los jugadores.
-    let newScore: string[] = [...scoreList, Game.getFormattedScore(scorePlayerOne, scorePlayerTwo, playerOne,playerTwo)]
-    setScoreList(newScore);
-  },[scorePlayerOne, scorePlayerTwo]);
-
   const resetGame = () => {
-    setScorePlayerOne(0);
-    setScorePlayerTwo(0);
-    setScoreList([])
+    Game.constructor(playerOne, playerTwo);
+    setScoreList([]);
+    //Se supone que esto en síncrono sin embargo, no se actualiza scoreList
+    refreshFunction(0,0);
   };
+
+  React.useEffect(() => {
+    refreshFunction(scorePlayerOne,scorePlayerTwo);
+  }, [scorePlayerOne, scorePlayerTwo]);
 
   return (
     <div className="App">
@@ -97,8 +132,8 @@ const App = () => {
           <GameComponent
             playerOne={playerOne}
             playerTwo={playerTwo}
-            scorePlayerOne={scorePlayerOne}
-            scorePlayerTwo={scorePlayerTwo}
+            scorePlayerOne={pointsPlayerOne}
+            scorePlayerTwo={pointsPlayerTwo}
             scoreList={scoreList}
             wonPoint={wonPoint}
             resetGame={resetGame}

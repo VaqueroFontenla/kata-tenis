@@ -5,8 +5,8 @@ import './GameComponent.css';
 interface Props {
     playerOne: string;
     playerTwo: string;
-    scorePlayerOne: number;
-    scorePlayerTwo: number;
+    scorePlayerOne: string;
+    scorePlayerTwo: string;
     scoreList: string[];
     wonPoint: (player: string) => void;
     resetGame: () => void;

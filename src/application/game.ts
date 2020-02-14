@@ -25,9 +25,9 @@ export const wonPoint = (playerName: string): void => {
 };
 
 export const getScore = (): string =>
-  getFormattedScore(scorePlayerOne, scorePlayerTwo, playerOneName, playerTwoName);
+  getFormattedScore(scorePlayerOne, scorePlayerTwo);
 
-const selectWinner = (difference: number, playerOneName: string, playerTwoName: string) => {
+const selectWinner = (difference: number) => {
   if (difference > 0) {
     return playerOneName;
   }
@@ -36,7 +36,7 @@ const selectWinner = (difference: number, playerOneName: string, playerTwoName: 
 
 const transformScore = (score: number) => SCORE_ARRAY[score];
 
-export const getFormattedScore = (scoreOne: number, scoreTwo: number, playerOneName: string, playerTwoName: string): string => {
+export const getFormattedScore = (scoreOne: number, scoreTwo: number): string => {
   let scoreDifference: number = scoreOne - scoreTwo;
   if (scoreDifference === NO_DIFFERENT_SCORE && scoreOne < MINIMAL_FOR_DEUCE) {
     return `${transformScore(scoreOne)} all`;
@@ -47,7 +47,7 @@ export const getFormattedScore = (scoreOne: number, scoreTwo: number, playerOneN
   if (scoreOne <= MINIMAL_FOR_DEUCE && scoreTwo <= MINIMAL_FOR_DEUCE) {
     return `${transformScore(scoreOne)} - ${transformScore(scoreTwo)}`;
   }
-  const winner = selectWinner(scoreDifference, playerOneName, playerTwoName);
+  const winner = selectWinner(scoreDifference);
   if (scoreDifference === 1 || scoreDifference === -1) {
     return `Advantage ${winner}`;
   }
@@ -58,5 +58,4 @@ export const Game = {
   constructor,
   wonPoint,
   getScore,
-  getFormattedScore
 };
